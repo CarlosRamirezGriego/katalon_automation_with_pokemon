@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "92E9A584528F6CE35A2EA6AEAAB58F6D",
+  "keywordClasses": [
+    {
+      "name": "business_logic.pokemon_app.ui.MainPage",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": false
+}

@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "807998921C92C0276BFFA88A938F1BDC",
+  "keywordClasses": [
+    {
+      "name": "business_logic.pokemon_app.ui.NationalDexPage",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}
