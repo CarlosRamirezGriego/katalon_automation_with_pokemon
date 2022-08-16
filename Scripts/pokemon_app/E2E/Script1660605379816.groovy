@@ -31,8 +31,10 @@ NationalDexPage natPage = new NationalDexPage()
 
 commonUi.NavigateToPokemonDBHomePage()
 mainPage.NavigateToPokedexFromQuickLinksMenu()
-System.out.println(natPage.DoesAPokemonWithThisNameExist("Pikachuuu"))
-System.out.println(natPage.DoesAPokemonWithThisNumberExist(2500))
-
+System.out.println(natPage.DoesAPokemonWithThisNameExist("Pikachu"))
+System.out.println(natPage.DoesAPokemonWithThisNumberExist(25))
+System.out.println(natPage.ReturnNumberOfPokemonWithThisName("Pikachu"))
+System.out.println(natPage.ReturnNameOfPokemonWithThisNumber(25))
+natPage.ClickPokemonWithThisName("Mewtwo")
 
 sleep(5000)

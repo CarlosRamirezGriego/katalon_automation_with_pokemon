@@ -24,16 +24,13 @@ import org.openqa.selenium.WebElement
 
 public class MainPage {
 
-	
+
 	public MainPage() {
 	}
-	
-	public void NavigateToPokedexFromQuickLinksMenu()
-	{
+
+	public void NavigateToPokedexFromQuickLinksMenu() {
 		List<WebElement> elements =  WebUI.findWebElements(findTestObject('pokemon_app/MainPage/NATIONAL_DEX_LINK'),4)
 		WebUI.waitForElementVisible(findTestObject('pokemon_app/MainPage/NATIONAL_DEX_LINK'), 10)
 		elements[0].click()
 	}
-	
-	
 }

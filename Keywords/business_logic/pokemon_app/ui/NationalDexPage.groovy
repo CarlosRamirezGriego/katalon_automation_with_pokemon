@@ -22,21 +22,17 @@ import internal.GlobalVariable
 import org.openqa.selenium.WebElement
 
 public class NationalDexPage {
-	
-	public NationalDexPage()
-	{}
-	
-	public boolean DoesAPokemonWithThisNameExist(String targetName)
-	{
+
+	public NationalDexPage() {}
+
+	public boolean DoesAPokemonWithThisNameExist(String targetName) {
 		boolean exists = false
 		List<WebElement> elements =  WebUI.findWebElements(findTestObject('pokemon_app/NationalDexPage/POKEMON_NAME_LINK'),20)
 		int amount = elements.size()
 		int index = 0
-		while(index <= amount-1)
-		{
+		while(index <= amount-1) {
 			String pokemonName_label = elements[index].text
-			if(pokemonName_label == targetName)
-			{
+			if(pokemonName_label == targetName) {
 				exists = true
 				break
 			}
@@ -44,21 +40,18 @@ public class NationalDexPage {
 		}
 		return exists
 	}
-	
-	
-	
-	public boolean DoesAPokemonWithThisNumberExist(int targetNumber)
-	{
+
+
+
+	public boolean DoesAPokemonWithThisNumberExist(int targetNumber) {
 		boolean exist = false
 		String targetNumberString = "#"+  this.FormatPokemonNumber(targetNumber)
 		List<WebElement> elements =  WebUI.findWebElements(findTestObject('pokemon_app/NationalDexPage/POKEMON_NUMBER_LABEL'),20)
 		int amount =  elements.size()
 		int index = 0
-		while(index <= amount-1)
-		{
+		while(index <= amount-1) {
 			String pokemonNumberLabel = elements[index].text
-			if(pokemonNumberLabel == targetNumberString)
-			{
+			if(pokemonNumberLabel == targetNumberString) {
 				exist = true
 				break
 			}
@@ -68,23 +61,83 @@ public class NationalDexPage {
 	}
 	
 	
-	
-	public String FormatPokemonNumber(int pokemonNumber)
+	public String ReturnNameOfPokemonWithThisNumber(int targetNumber)
 	{
-		String stringNumber = null
-		if(pokemonNumber > 1 && pokemonNumber <= 9)
+		String name = null
+		boolean numberExist =  this.DoesAPokemonWithThisNumberExist(targetNumber)
+		if(numberExist)
 		{
+			List<WebElement> elements =  WebUI.findWebElements(findTestObject('pokemon_app/NationalDexPage/POKEMON_NAME_LINK'),20)
+			int index = targetNumber - 1
+			name =  elements[index].text
+		}
+		else
+		{
+			System.out.println("returnNameOfPokemonWithThisNumber() could not find Name of Pokemon with Number: "+targetNumber)
+		}
+		return name
+	}
+	
+	
+	
+	public int ReturnNumberOfPokemonWithThisName(String targetName)
+	{
+		int pkNumber = -1
+		boolean nameExist = this.DoesAPokemonWithThisNameExist(targetName)
+		if(nameExist)
+		{
+		    List<WebElement> elements =  WebUI.findWebElements(findTestObject('pokemon_app/NationalDexPage/POKEMON_NAME_LINK'),20)
+			int amount = elements.size()
+			int index = 0
+			while(index <= amount-1)
+			{
+				
+				String name = elements[index].text
+				if(name == targetName)
+				{
+					pkNumber = index + 1
+					break
+				}
+				index = index + 1
+			}
+		}
+		else
+		{
+			System.out.println("returnNumberOfPokemonWithThisName() could not find Number of Pokemon with Name: "+targetName)
+		}
+		return pkNumber
+	}
+
+	
+	public void ClickPokemonWithThisName(String targetName)
+	{
+		boolean nameExist =  this.DoesAPokemonWithThisNameExist(targetName)
+		if(nameExist)
+		{
+			int pkNumber = this.ReturnNumberOfPokemonWithThisName(targetName)
+			List<WebElement> elements =  WebUI.findWebElements(findTestObject('pokemon_app/NationalDexPage/POKEMON_NAME_LINK'),20)
+			WebUI.waitForElementVisible(findTestObject('pokemon_app/NationalDexPage/POKEMON_NAME_LINK'), 10)
+			elements[pkNumber-1].click()
+		}
+		else
+		{
+			System.out.println("clickPokemonWithThisName() could not find Pokemon named: "+targetName)
+		}
+	}
+	
+
+
+	public String FormatPokemonNumber(int pokemonNumber) {
+		String stringNumber = null
+		if(pokemonNumber > 1 && pokemonNumber <= 9) {
 			stringNumber = "00"+pokemonNumber.toString()
 		}
-		else if(pokemonNumber > 10 && pokemonNumber <= 99)
-		{
+		else if(pokemonNumber > 10 && pokemonNumber <= 99) {
 			stringNumber = "0"+pokemonNumber.toString()
 		}
-		else if(pokemonNumber > 99)
-		{
+		else if(pokemonNumber > 99) {
 			stringNumber = pokemonNumber.toString()
 		}
 		return stringNumber
 	}
-	
 }
