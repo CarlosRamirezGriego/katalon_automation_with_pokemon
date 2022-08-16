@@ -19,15 +19,16 @@ import org.openqa.selenium.Keys as Keys
 import business_logic.pokemon_app.common.CommonUI
 import business_logic.pokemon_app.ui.MainPage
 import business_logic.pokemon_app.ui.NationalDexPage
-
+import business_logic.pokemon_app.api.PokemonLogic
 
 /*** Import Libraries ***/
 
 CommonUI commonUi = new CommonUI()
 MainPage mainPage = new MainPage()
 NationalDexPage natPage = new NationalDexPage()
+PokemonLogic pkAPI = new PokemonLogic()
 
-/*** Steps Execution ***/
+/*** Steps Execution UI ***/
 
 commonUi.NavigateToPokemonDBHomePage()
 mainPage.NavigateToPokedexFromQuickLinksMenu()
@@ -38,3 +39,8 @@ System.out.println(natPage.ReturnNameOfPokemonWithThisNumber(25))
 natPage.ClickPokemonWithThisName("Mewtwo")
 
 sleep(5000)
+
+
+/*** Steps Execution API ***/
+System.out.println(pkAPI.ReturnNameOfPokemonWithThisNumber(25))
+System.out.println(pkAPI.ReturnNumberOfPokemonWithThisName("Pikachu"))
